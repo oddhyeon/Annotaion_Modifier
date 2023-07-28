@@ -1,3 +1,4 @@
+import webbrowser
 import sys
 import copy
 import os
@@ -607,11 +608,28 @@ class MainWindow(QMainWindow):
 
         self.tab1 = QWidget()  # 탭1 위젯 생성
         self.tab2 = Tab2Widget()  # 탭2 위젯 생성
+        self.tab3 = QWidget()  # 탭3 위젯 생성
 
         self.tab_widget.addTab(self.tab1, "Active")  # 탭1 추가
         self.tab_widget.addTab(self.tab2, "Lotation")  # 탭2 추가
 
+        # Help tab
+        help_text = QLabel("Click the button below to visit the GitHub repository for help.")
+        help_layout = QVBoxLayout()
+        help_layout.addWidget(help_text)
+
+        self.help_link = QLabel()
+        self.help_link.setOpenExternalLinks(True)
+        self.help_link.setText('<a href="https://github.com/oddhyeon/Annotaion_Modifier">GitHub Repository</a>')
+        help_layout.addWidget(self.help_link)
+
+        self.tab3.setLayout(help_layout)
+        self.tab_widget.addTab(self.tab3, "Help")
+
         self.setCentralWidget(self.tab_widget)
+
+        # Connect the tabBarClicked signal to the function that handles the click event
+        self.tab_widget.tabBarClicked.connect(self.handle_tab_click)
 
         # 탭1 UI 구성
         self.label_files_tab1 = QLabel("Selected Files: ", self.tab1)
@@ -766,6 +784,11 @@ class MainWindow(QMainWindow):
         self.label_copyright = QLabel(
             "Copyright 2023.oddhyeon. All rights reserved.", self.tab1)
         self.label_copyright.setGeometry(20, 620, 360, 100)
+
+    def handle_tab_click(self, index):
+        # Check if the clicked tab is the "Help" tab (index 2) and open the GitHub repository URL
+        if index == 2:
+            webbrowser.open("https://github.com/oddhyeon/Annotaion_Modifier")
 
     def setup_ui(self):
         self.setWindowTitle("XML Editor")
