@@ -1,5 +1,8 @@
 # Annotaion_Modifier
-GUI 버튼들의 기능 및 역할 설명
+해당 XML Editor는 현재 사용중인 Alchera Annotation Tool에 생산성을 돕기 위해 만든 프로그램입니다.
+
+
+# GUI
 
 ## 1. Active Tab : 
 
